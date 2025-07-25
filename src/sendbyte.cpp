@@ -1,5 +1,6 @@
-#include "sendbyte.h"
-#include "config.h"
+#include <Arduino.h>
+#include "../inc/sendbyte.h"
+#include "../inc/config.h"
 
 byte sendByte(byte data) {
   byte received = 0;
@@ -12,6 +13,13 @@ byte sendByte(byte data) {
 
     int sensorVal = analogRead(sensorPin);
     bool receivedBit = sensorVal > threshold;
+
+    Serial.print("Sent bit: ");
+    Serial.print(bitVal);
+    Serial.print(" | Sensor: ");
+    Serial.print(sensorVal);
+    Serial.print(" → ");
+    Serial.println(receivedBit);
 
     received = (received << 1) | (receivedBit ? 1 : 0);
     delayMicroseconds(bitTime - settleTime);

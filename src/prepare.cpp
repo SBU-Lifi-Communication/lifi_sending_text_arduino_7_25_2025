@@ -1,7 +1,10 @@
-#include "prepare.h"
-#include "config.h"
+#include <Arduino.h>
+#include "../inc/prepare.h"
+#include "../inc/config.h"
 
 void prepareData() {
+  Serial.println("=== Running prepareData() ===");
+
   for (int i = 0; i < numExpectedBytes; i++) {
     byte b = 0;
     for (int bit = 0; bit < 8; bit++) {
@@ -11,5 +14,6 @@ void prepareData() {
       }
     }
     expectedBytes[i] = b;
+
   }
 }
