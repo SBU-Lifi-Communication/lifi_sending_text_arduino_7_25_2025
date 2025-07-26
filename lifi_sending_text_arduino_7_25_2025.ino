@@ -25,9 +25,6 @@ void setup() {
   pinMode(outPin, OUTPUT);
   Serial.begin(31250);
   delay(1000);
-
-  Serial.println("=== Serial test from setup ===");
-
   calibrate();
   prepareData();
 }
