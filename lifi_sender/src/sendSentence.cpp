@@ -6,26 +6,43 @@
 void sendSentence(const String &msg, int outPin) {
   Serial.println(F(">>> sendSentence START"));
 
-  const int BIT_LEN = 400;
-  bool bitArray[BIT_LEN];
+  const int RAW_BUFFER = 400;
+  bool rawBits[RAW_BUFFER];
 
-  // Convert the message to bits
-  int bitCount = String2Bit(msg, bitArray);
+  // Convert the message to raw bits
+  int rawBitCount = String2Bit(msg, rawBits);
 
   Serial.print(F("Converted message to "));
-  Serial.print(bitCount);
+  Serial.print(rawBitCount);
   Serial.println(F(" bits."));
 
-  // Pad with zeros up to 400 bits
-  for (int i = bitCount; i < BIT_LEN; i++) {
-    bitArray[i] = 0;
+  // Calculate how many bytes we have (8 bits per byte)
+  int byteCount = rawBitCount / 8;
+
+  // Output buffer with framing 1bits1
+  bool framedBits[RAW_BUFFER];  // buffer big enough for framed bits
+  int framedIndex = 0;
+
+  for (int b = 0; b < byteCount; b++) {
+    // Leading 1
+    framedBits[framedIndex++] = 1;
+
+    // 8 data bits
+    for (int i = 0; i < 8; i++) {
+      framedBits[framedIndex++] = rawBits[b * 8 + i];
+    }
+
+    // Trailing 1
+    framedBits[framedIndex++] = 1;
   }
 
-  Serial.print(F("Sending 400 bits on pin "));
+  Serial.print(F("Sending "));
+  Serial.print(framedIndex);
+  Serial.println(F(" bits with framing on pin "));
   Serial.println(outPin);
 
-  // Send with 30 ms per bit (30000 µs)
-  sendBits(bitArray, bitCount, 30000, outPin);
+  // Send only the bits we built, no padding
+  sendBits(framedBits, framedIndex, 50000, outPin);
 
   Serial.println(F(">>> sendSentence DONE"));
 }
