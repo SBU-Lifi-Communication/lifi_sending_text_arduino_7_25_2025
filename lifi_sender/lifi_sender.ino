@@ -1,5 +1,5 @@
 #include "inc/SendCalibration.h"
-
+#include "inc/sendSentence.h"
 const int outPin = 2;
 
 void setup() {
@@ -12,4 +12,6 @@ void setup() {
   Serial.println("Calibration sent.");
 }
 
-void loop() {}
+void loop() {
+    sendSentence("Hello Arduino!", outPin);
+}
