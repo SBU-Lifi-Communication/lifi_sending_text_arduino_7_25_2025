@@ -42,7 +42,7 @@ void sendSentence(const String &msg, int outPin) {
   Serial.println(outPin);
 
   // Send only the bits we built, no padding
-  sendBits(framedBits, framedIndex, 50000, outPin);
+  sendBits(framedBits, framedIndex, 60000, outPin);
 
   Serial.println(F(">>> sendSentence DONE"));
 }

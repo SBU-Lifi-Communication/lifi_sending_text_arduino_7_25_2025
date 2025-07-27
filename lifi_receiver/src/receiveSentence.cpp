@@ -16,12 +16,12 @@ void receiveSentence(int analogPin, int threshold) {
     int startVal = analogRead(analogPin);
     bool startBit = (startVal > threshold);
     if (!startBit) {
-      delayMicroseconds(50000); // Skip if no start bit yet
+      delayMicroseconds(60000); // Skip if no start bit yet
       continue;
     }
     Serial.println(F("Start bit detected."));
 
-    delayMicroseconds(50000); // move to next bit time
+    delayMicroseconds(60000); // move to next bit time
 
     // 2️⃣ Read 8 data bits
     for (int i = 0; i < DATA_BITS; i++) {
@@ -31,7 +31,7 @@ void receiveSentence(int analogPin, int threshold) {
       Serial.print(i);
       Serial.print(F(" -> "));
       Serial.println(dataBits[i]);
-      delayMicroseconds(50000);
+      delayMicroseconds(60000);
     }
 
     // 3️⃣ Expect trailing 1
@@ -39,11 +39,11 @@ void receiveSentence(int analogPin, int threshold) {
     bool endBit = (endVal > threshold);
     if (!endBit) {
       Serial.println(F("Error: Missing end bit."));
-      delayMicroseconds(50000);
+      delayMicroseconds(60000);
     }
     Serial.println(F("End bit detected."));
 
-    delayMicroseconds(50000); // move to next byte gap
+    delayMicroseconds(60000); // move to next byte gap
 
     // 5️⃣ Convert to character(s)
     String part = Bit2String(dataBits, DATA_BITS);
