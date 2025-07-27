@@ -10,5 +10,6 @@ void sendBits(bool *bits, int length, unsigned int bitDelayMicros, int outPin) {
     Serial.print(bits[i]);
     delayMicroseconds(bitDelayMicros);
   }
+  Serial.println();
   digitalWrite(outPin, LOW);
 }

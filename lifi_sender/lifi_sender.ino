@@ -1,15 +1,15 @@
-#include "inc/String2Bit.h"
-#include "inc/SendBit.h"
+#include "inc/SendCalibration.h"
 
 const int outPin = 2;
-bool bitArray[300];
 
 void setup() {
   Serial.begin(9600);
-  delay(5000);
-  String msg = "Hi";
-  int bitCount = String2Bit(msg, bitArray);
-  sendBits(bitArray, bitCount, 100000, outPin); 
+  while(!Serial);
+  Serial.println("Starting calibration sequence...");
+  
+  sendCalibration(outPin);
+
+  Serial.println("Calibration sent.");
 }
 
 void loop() {}
