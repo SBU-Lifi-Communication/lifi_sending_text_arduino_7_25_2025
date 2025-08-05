@@ -36,7 +36,7 @@ void sendSentence(const String &msg, int outPin) {
   Serial.print(framedIndex);
   Serial.println(F(" bits with Hamming + Framing"));
 
-  sendBits(framedBits, framedIndex, 26, outPin);
+  sendBits(framedBits, framedIndex, 1000, outPin);
 
   Serial.println(F(">>> sendSentence DONE"));
 }

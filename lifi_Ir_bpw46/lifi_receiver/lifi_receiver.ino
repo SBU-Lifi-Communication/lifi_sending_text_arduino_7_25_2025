@@ -15,4 +15,5 @@ void setup() {
 
   receiveSentence(analogPin, threshold);
 }
+
 void loop() {}
