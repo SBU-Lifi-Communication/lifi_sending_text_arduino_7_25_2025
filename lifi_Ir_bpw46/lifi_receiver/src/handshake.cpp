@@ -10,7 +10,7 @@ int handshake(int analogPin) {
 
   while (true) {
     int curr = analogRead(analogPin);
-    int diff = curr - prev;  // flipped direction to match your signal
+    int diff = prev - curr;
     prev = curr;
 
     Serial.print(F("Curr: "));
@@ -18,8 +18,9 @@ int handshake(int analogPin) {
     Serial.print(F(" Diff: "));
     Serial.println(diff);
 
-    if (diff > 50) {  // now triggers on large FALL (low 1 to high 0)
+    if (diff > 50) {
       if (!firstMaxFound) {
+        // First candidate for max
         max1 = diff;
         firstMaxFound = true;
         Serial.print(F("First max candidate: "));
@@ -29,12 +30,14 @@ int handshake(int analogPin) {
         float upper = max1 * 1.1;
 
         if (diff >= lower && diff <= upper) {
+          // Found second max close to first
           Serial.print(F("Second max near first detected: "));
           Serial.println(diff);
           Serial.print(F(">>> handshake DONE, returning "));
           Serial.println(max1);
-          return curr;  // or return a flag like 1 if needed
+          return curr;
         } else {
+          // New max too far from old → replace max1
           max1 = diff;
           Serial.print(F("New max candidate (replacing old): "));
           Serial.println(max1);
@@ -42,6 +45,6 @@ int handshake(int analogPin) {
       }
     }
 
-    delayMicroseconds(1000000);  // 1s sample rate, adjust as needed
+    delayMicroseconds(1000000); // Adjust sample rate
   }
 }

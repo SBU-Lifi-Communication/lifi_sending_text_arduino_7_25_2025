@@ -5,7 +5,7 @@
 void sendCalibration(int outPin) {
   Serial.println(F(">>> sendCalibration STARTED"));
 
-  bool preamble[8] = {0, 0, 1, 1, 0, 0, 1, 1};
+  bool preamble[8] = {0, 0, 1, 1, 0, 0, 1, 1,};
   unsigned long preambleDelay = 1000000;
 
   Serial.println(F("[Preamble] Sending 0,1 pattern for ~3s..."));

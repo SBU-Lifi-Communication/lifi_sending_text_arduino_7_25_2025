@@ -19,21 +19,20 @@ void receiveSentence(int analogPin, int threshold) {
 
   while (true) {
     int startVal = analogRead(analogPin);
-    if (startVal <= threshold) {
+    if (startVal >= threshold) {
       delayMicroseconds(60000);
       continue;
     }
-
-    Serial.println(F("Start bit detected."));
+    message = "";
     delayMicroseconds(60000);
-
-    for (int i = 0; i < TOTAL_BITS; i++) {
+    framedBits[0] = 1;
+    for (int i = 1; i < TOTAL_BITS; i++) {
       framedBits[i] = analogRead(analogPin) < threshold;
+      Serial.print(framedBits[i]);
       delayMicroseconds(60000);
     }
-
+    Serial.println();
     if (!removeFraming(framedBits, TOTAL_BITS, hammingBits, hammingLen)) {
-      Serial.println(F("Framing error."));
       continue;
     }
 
@@ -44,10 +43,8 @@ void receiveSentence(int analogPin, int threshold) {
 
     String part = Bit2String(dataBits, dataLen);
     message += part;
-
     Serial.print(F("Received char: "));
     Serial.println(part);
-    Serial.print(F("Full message: "));
-    Serial.println(message);
+
   }
 }

@@ -20,7 +20,7 @@ int receiveCalibration(int analogPin) {
   for (int i = 0; i < BIT_COUNT; i++) {
     int value = analogRead(analogPin);
     if(firstiter){
-    while(!(value < int(maxVal *0.8))){
+    while((value < int(maxVal *1.2))){
             Serial.print("in while:");
             Serial.print(value);
             Serial.print(" maxval: ");
