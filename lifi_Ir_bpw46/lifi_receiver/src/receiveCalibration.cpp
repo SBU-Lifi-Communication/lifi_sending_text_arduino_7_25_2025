@@ -8,7 +8,7 @@ int receiveCalibration(int analogPin) {
   // 1️⃣ Wait for handshake
   int middle_of_zero_and_one = handshake(analogPin);
   Serial.print(F("Handshake complete, max diff: "));
-  Serial.println(maxVal);
+  Serial.println(middle_of_zero_and_one);
   // 2️⃣ Read 25 bits with alternating 0/1 pattern
   const int BIT_COUNT = 24;
   long sum0 = 0;
@@ -55,7 +55,7 @@ int receiveCalibration(int analogPin) {
   }
 
   // 3️⃣ Compute threshold
-  float avg0 = (count0 == 13) ? (float)sum0 / count0 : 0;
+  float avg0 = (count0 == 12) ? (float)sum0 / count0 : 0;
   float avg1 = (count1 == 12) ? (float)sum1 / count1 : 0;
   int threshold = (avg0 + avg1) / 2;
 

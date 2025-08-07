@@ -36,7 +36,7 @@ int handshake(int analogPin) {
           Serial.println(diff);
           Serial.print(F(">>> handshake DONE, returning "));
           Serial.println(max1);
-          return curr + (diff/2);
+          return curr - (diff/2);
         } else {
           // New max too far from old → replace max1
           max1 = diff;
