@@ -10,7 +10,7 @@ int receiveCalibration(int analogPin) {
   Serial.print(F("Handshake complete, max diff: "));
   Serial.println(maxVal);
   // 2️⃣ Read 25 bits with alternating 0/1 pattern
-  const int BIT_COUNT = 25;
+  const int BIT_COUNT = 24;
   long sum0 = 0;
   long sum1 = 0;
   int count0 = 0;
@@ -18,15 +18,15 @@ int receiveCalibration(int analogPin) {
   bool firstiter = true;
   bool expectOne = false; // start with 0
   for (int i = 0; i < BIT_COUNT; i++) {
-    int value = analogRead(analogPin);
+    int value = 1024 - analogRead(analogPin);
     if(firstiter){
       //1 for lesser an 0 for bigger than the middle_of_zero_and_one
-    while((value < middle_of_zero_and_one)){
+    while((value >= middle_of_zero_and_one)){
             Serial.print("in while:");
             Serial.print(value);
             Serial.print(" middle_of_zero_and_one: ");
             Serial.println(int(middle_of_zero_and_one));
-            value = analogRead(analogPin);
+            value = 1024 - analogRead(analogPin);
             delay(10);
     }
             Serial.print("out while:");

@@ -10,8 +10,8 @@ int handshake(int analogPin) {
   Serial.println(F(">>> handshake START"));
 
   while (true) {
-    int curr = analogRead(analogPin);
-    int diff = prev - curr;
+    int curr = 1024 - analogRead(analogPin) ;
+    int diff =  curr - prev;
     prev = curr;
 
     Serial.print(F("Curr: "));
@@ -19,7 +19,7 @@ int handshake(int analogPin) {
     Serial.print(F(" Diff: "));
     Serial.println(diff);
 
-    if (diff > 50) {
+    if (diff > 30) {
       if (!firstMaxFound) {
         // First candidate for max
         max1 = diff;

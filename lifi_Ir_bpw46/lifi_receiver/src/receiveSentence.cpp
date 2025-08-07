@@ -18,8 +18,8 @@ void receiveSentence(int analogPin, int threshold) {
   String message = "";
 
   while (true) {
-    int startVal = analogRead(analogPin);
-    if (startVal >= threshold) {
+    int startVal = 1024 - analogRead(analogPin);
+    if (startVal <= threshold) {
       delayMicroseconds(15000);
       if (!(message == "")){
         Serial.println(message);
@@ -30,7 +30,7 @@ void receiveSentence(int analogPin, int threshold) {
     delayMicroseconds(15000);
     framedBits[0] = 1;
     for (int i = 1; i < TOTAL_BITS; i++) {
-      framedBits[i] = analogRead(analogPin) < threshold;
+      framedBits[i] = (1024 - analogRead(analogPin)) > threshold;
       Serial.print(framedBits[i]);
       delayMicroseconds(15000);
     }
