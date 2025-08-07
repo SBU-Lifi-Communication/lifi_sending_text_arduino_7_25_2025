@@ -14,12 +14,12 @@ void sendCalibration(int outPin) {
 
   bool calibration[25];
   for (int i = 0; i < 25; i++) {
-    calibration[i] = (i % 2 == 0);
+    calibration[i] = (i % 2 != 0);
   }
 
-  Serial.println(F("[Calibration] Sending 24-bit 1010 pattern with 100ms delay per bit..."));
+  Serial.println(F("[Calibration] Sending 24-bit 11001100 pattern with 30ms delay per bit..."));
   sendBits(calibration, 25, 30000, outPin);
+  digitalWrite(outPin,0);
   Serial.println(F("[Calibration] Done."));
-
   Serial.println(F(">>> sendCalibration COMPLETE"));
 }

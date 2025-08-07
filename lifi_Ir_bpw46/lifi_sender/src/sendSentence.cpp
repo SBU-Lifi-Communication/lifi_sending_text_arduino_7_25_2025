@@ -8,7 +8,7 @@
 void sendSentence(const String &msg, int outPin) {
   Serial.println(F(">>> sendSentence START"));
 
-  const int RAW_BUFFER = 500;
+  const int RAW_BUFFER = 10000;
   bool rawBits[RAW_BUFFER];
 
   int rawBitCount = String2Bit(msg, rawBits);
@@ -37,6 +37,6 @@ void sendSentence(const String &msg, int outPin) {
   Serial.println(F(" bits with Hamming + Framing"));
 
   sendBits(framedBits, framedIndex, 15000, outPin);
-
+  digitalWrite(outPin,0);
   Serial.println(F(">>> sendSentence DONE"));
 }

@@ -6,7 +6,7 @@ int receiveCalibration(int analogPin) {
   Serial.println(F(">>> receiveCalibration START"));
 
   // 1️⃣ Wait for handshake
-  int maxVal = handshake(analogPin);
+  int middle_of_zero_and_one = handshake(analogPin);
   Serial.print(F("Handshake complete, max diff: "));
   Serial.println(maxVal);
   // 2️⃣ Read 25 bits with alternating 0/1 pattern
@@ -20,11 +20,12 @@ int receiveCalibration(int analogPin) {
   for (int i = 0; i < BIT_COUNT; i++) {
     int value = analogRead(analogPin);
     if(firstiter){
-    while((value < int(maxVal *1.2))){
+      //1 for lesser an 0 for bigger than the middle_of_zero_and_one
+    while((value < middle_of_zero_and_one)){
             Serial.print("in while:");
             Serial.print(value);
-            Serial.print(" maxval: ");
-            Serial.println(int(maxVal *0.8));
+            Serial.print(" middle_of_zero_and_one: ");
+            Serial.println(int(middle_of_zero_and_one));
             value = analogRead(analogPin);
             delay(10);
     }

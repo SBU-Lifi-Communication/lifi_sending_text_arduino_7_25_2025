@@ -5,6 +5,7 @@ int handshake(int analogPin) {
   int prev = analogRead(analogPin);
   int max1 = 0;
   bool firstMaxFound = false;
+  int avg;
 
   Serial.println(F(">>> handshake START"));
 
@@ -35,7 +36,7 @@ int handshake(int analogPin) {
           Serial.println(diff);
           Serial.print(F(">>> handshake DONE, returning "));
           Serial.println(max1);
-          return curr;
+          return curr + (diff/2);
         } else {
           // New max too far from old → replace max1
           max1 = diff;
