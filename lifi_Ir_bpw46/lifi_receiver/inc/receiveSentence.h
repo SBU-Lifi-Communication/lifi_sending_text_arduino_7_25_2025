@@ -1,8 +1,9 @@
+// inc/receiveSentence.h
+#pragma once
 #ifndef RECEIVESENTENCE_H
 #define RECEIVESENTENCE_H
 
-#include <Arduino.h>
-
+// why: keep Arduino dependency in .cpp, header stays lightweight
 void receiveSentence(int analogPin, int threshold);
 
-#endif
+#endif // RECEIVESENTENCE_H
