@@ -1,0 +1,7 @@
+day 12:08 curtains closed lights off regular room :                4.58v             Ir:            3.85v
+above with phone led direct on it:                                 4.29v             Ir:            3.7v
+day 12:12 curtains opened lights on regular room :                 4.4v              Ir:            3.75v
+above with phone led direct on it:                                 4.28v             Ir:            3.65v
+in this condition :                     on  from :                 3.65v - 3.85v              off from :         4.28v - 4.58v         middle is :  4.065 with bw of 0.43
+our frequency that we want is from 100Kbps to 100Mbps : 100kHz to 100 MHz 
+for now filter we want : 100Khz to 20Mbps
