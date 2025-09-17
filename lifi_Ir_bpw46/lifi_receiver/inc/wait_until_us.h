@@ -1,15 +1,7 @@
-// inc/wait_until_us.h
-#pragma once
+#ifndef WAIT_UNTIL_US_H
+#define WAIT_UNTIL_US_H
+
 #include <Arduino.h>
 
-/**
- * Busy-waits until micros() reaches 'target'.
- * Rollover-safe; optional yield when WAIT_UNTIL_US_YIELD is defined.
- */
-static inline void wait_until_us(unsigned long target) {
-  while ((long)(micros() - target) < 0) {
-#ifdef WAIT_UNTIL_US_YIELD
-    yield(); // why: cooperative on WiFi/RTOS boards
+static inline void wait_until_us(unsigned long target) ;
 #endif
-  }
-}

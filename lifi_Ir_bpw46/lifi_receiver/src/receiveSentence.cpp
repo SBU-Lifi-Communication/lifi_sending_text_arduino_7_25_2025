@@ -19,7 +19,7 @@ void receiveSentence(int analogPin, int threshold) {
   bool dataBits[8];
   int hammingLen = 0, dataLen = 0;
   String message;
-
+  //fix the next due wait time with timer based delay without drift
   while (true) {
     const int startVal = 1024 - analogRead(analogPin);
     unsigned long next_due = micros() + INTERVAL_US;

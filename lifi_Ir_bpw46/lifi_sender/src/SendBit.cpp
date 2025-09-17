@@ -17,6 +17,7 @@ void sendBits(bool *bits, int length, unsigned int bitDelayMicros, int outPin) {
     uint32_t target = start + (uint32_t)(i + 1) * bitDelayMicros;
 
     // Spin until we reach the scheduled boundary (overflow-safe compare)
+      //fix the next due wait time with timer based delay without drift and with while true
     while ((int32_t)(micros() - target) < 0) { /* wait */ }
   }
 
