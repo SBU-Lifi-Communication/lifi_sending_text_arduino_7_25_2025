@@ -5,4 +5,5 @@ above with phone led direct on it:                                 4.28v        
 in this condition :                     on  from :                 3.65v - 3.85v              off from :         4.28v - 4.58v         middle is :  4.065 with bw of 0.43
 our frequency that we want is from 100Kbps to 100Mbps : 100kHz to 100 MHz 
 for now filter we want : 100Khz to 20Mbps
+into resistance formula : (vmid / (4.768 - vmid)) * 15k = R_pr
 all above tested with 15kohm resistor 
